@@ -17,13 +17,7 @@ interface ChatInterfaceProps {
   projectIdea: string;
 }
 
-interface ConversationResponse {
-  conversation_id: string;
-  response: string;
-  phase: string;
-  download_url: string;
-  filename: string;
-}
+
 
 const ChatInterface: React.FC<ChatInterfaceProps> = ({ onBack, projectIdea }) => {
   const [messages, setMessages] = useState<Message[]>([]);
