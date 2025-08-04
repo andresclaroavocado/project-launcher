@@ -6,15 +6,16 @@ import {
   FileText, 
   GitBranch, 
   Zap, 
+  Clock, 
+  Users, 
+  CheckCircle,
   ArrowRight,
-  Sparkles,
-  Users,
-  Clock,
-  CheckCircle
+  Sparkles
 } from 'lucide-react';
-import toast, { Toaster } from 'react-hot-toast';
+import { toast, Toaster } from 'react-hot-toast';
 import axios from 'axios';
 import ChatInterface from './components/ChatInterface';
+import { API_ENDPOINTS } from './config/api';
 
 const App: React.FC = () => {
   const [projectIdea, setProjectIdea] = useState('');
@@ -30,7 +31,7 @@ const App: React.FC = () => {
     setIsLoading(true);
     try {
       // Start new conversation - direct call to backend using axios
-      const apiUrl = 'http://localhost:8000/api/v1/conversation/start';
+      const apiUrl = API_ENDPOINTS.conversation.start;
       console.log('Making API call to:', apiUrl);
       console.log('Request payload:', { project_idea: projectIdea });
       
