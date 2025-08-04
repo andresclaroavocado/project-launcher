@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Send, Bot, User, Sparkles, ArrowLeft } from 'lucide-react';
 import axios from 'axios';
+import { API_ENDPOINTS } from '../config/api';
 
 interface Message {
   id: string;
@@ -43,7 +44,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onBack, projectIdea }) =>
   const startConversation = async () => {
     setIsLoading(true);
     try {
-      const response = await axios.post('http://localhost:8000/api/v1/conversation/start', {
+      const response = await axios.post(API_ENDPOINTS.conversation.start, {
         project_idea: projectIdea
       });
 
@@ -91,7 +92,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onBack, projectIdea }) =>
     setIsLoading(true);
 
     try {
-      const response = await axios.post('http://localhost:8000/api/v1/conversation/continue', {
+      const response = await axios.post(API_ENDPOINTS.conversation.continue, {
         conversation_id: conversationId,
         message: inputMessage
       });
@@ -133,7 +134,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onBack, projectIdea }) =>
   const downloadClaudeResponse = async (downloadUrl: string, filename: string) => {
     try {
       const response = await axios.get(
-        `http://localhost:8000${downloadUrl}`,
+        `${API_ENDPOINTS.download}${downloadUrl}`,
         { responseType: 'blob' }
       );
 
